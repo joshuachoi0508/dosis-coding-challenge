@@ -1,0 +1,116 @@
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+}
+
+#index {
+    text-align: center;
+    font-family: Helvetica;
+    font-weight: 300;
+    color: #333030;
+}
+
+#container {
+    max-width: 1000px;
+}
+
+.create {
+    display: inline-block;
+    max-width: 900px;
+}
+
+table {
+    display: inline-table;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.title {
+    font-family: 'Open Sans';
+}
+
+input {
+    height: 27px;
+    margin: 20px 0 0 1%;
+    width: calc(100% * (1/4) - 10px - 1px);
+    border: 1px solid rgba(30, 107, 0, 0.46);
+    color: rgba(30, 107, 0, 0.75);
+    padding-left: 4px;
+}
+
+input:focus {
+    outline: 0;
+}
+
+.button {
+    border: 1px solid rgba(30, 107, 0, 0.75);
+    color: rgba(30, 107, 0, 0.75);
+}
+
+.button:hover {
+    border: 1px solid rgba(30, 107, 0, 0.75);
+    color: white;
+    background: rgba(30, 107, 0, 0.75);
+    cursor: pointer;
+}
+
+.button:focus {
+    outline: 0;
+}
+
+#errors {
+    color: #ff5f5f;
+    font-size: 14px;
+    margin: 5px;
+}
+
+#pannels {
+    list-style: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#pannels-title {
+    margin-top: 20px;
+}
+
+.pannel {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+table {
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
+
+#toggle {
+    width: 157px;
+    height: 28px;
+    margin: -4px 0 16px 0;
+}
+
+::placeholder {
+    color: rgba(30, 107, 0, 0.623);
+}
+
+th {
+    font-weight: 500;
+}
+
+td {
+    font-weight: 100;
+}
+
+#edit {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    font-family: Helvetica;
+}

@@ -1,0 +1,8 @@
+{
+  "name": "dosis",
+  "private": true,
+  "dependencies": {
+    "gon": "^1.0.3",
+    "jquery": "^3.3.1"
+  }
+}

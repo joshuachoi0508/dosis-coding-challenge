@@ -1,0 +1,159 @@
+<div id="index">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+    <% dates = [] %>
+    <% readings = [] %>
+    <% amounts = [] %>
+    <%
+        @pannels.each do |pannel|
+            dates.push(String(pannel.date.month) + "-" + String(pannel.date.day) + "-" + String(pannel.date.year))
+            readings.push(pannel.reading)
+            amounts.push(pannel.amount)
+        end
+    %>
+
+    <script>
+    String.prototype.replaceAll = function(search, replacement) {
+        var target = this;
+        return target.split(search).join(replacement);
+    };
+
+        let dates = '<%= dates %>'
+        let readings = '<%= readings %>'
+        let amounts = '<%= amounts %>'
+    </script>
+
+    <%= javascript_include_tag('chart.js') %>
+        
+    <h1 id="pannels-title">Pannels</h1>
+    <article id="tables">
+        <table style="width:100%">
+        <tr>
+            <th>Date</th>
+            <th>Reading</th> 
+            <th>Amount</th>
+            <th>Advisement</th>
+            <th>Edit</th>
+        </tr>
+        <% if @pannels %>
+            <% @pannels.each do |pannel| %>
+                <tr>
+                    <td><%= pannel.date.month %>-<%= pannel.date.day %>-<%= pannel.date.year %></td>
+                    <% if pannel.reading %>
+                        <td><%= pannel.reading %> pts</td>
+                    <% else %>
+                        <td>n/a</td>
+                    <% end %>
+                    <% if pannel.amount %>
+                        <td><%= pannel.amount %> units</td>
+                    <% else %>
+                        <td>n/a</td>
+                    <% end %>
+                    <% if pannel.advisement %>
+                        <td><%= pannel.advisement %> units</td>
+                    <% else %>
+                        <td>n/a</td>
+                    <% end %>
+                    <td><a href="<%= edit_pannel_url(pannel) %>">Update Advisement</a></td>
+                </tr>
+            <% end %>
+        <% end %>
+        </table>
+    </article>
+    <article id="tables" style="display: none">
+        <table style="width:100%">
+        <tr>
+            <th>PID</th>
+            <th>SID</th>
+            <th>Date</th>
+            <th>Reading</th> 
+            <th>Amount</th>
+            <th>Advisement</th>
+            <th>Acceptance</th>
+            <th>% Accepted</th>
+        </tr>
+        <% if @pannels %>
+            <% @pannels.each do |pannel| %>
+                <tr>
+                    <td><%= pannel.PID %></td>
+                    <td><%= pannel.SID %></td>
+                    <td><%= pannel.date.month %>-<%= pannel.date.day %>-<%= pannel.date.year %></td>
+                    <% if pannel.reading %>
+                        <td><%= pannel.reading %> pts</td>
+                    <% else %>
+                        <td>n/a</td>
+                    <% end %>
+                    <% if pannel.amount %>
+                        <td><%= pannel.amount %> units</td>
+                    <% else %>
+                        <td>n/a</td>
+                    <% end %>
+                    <% if pannel.advisement %>
+                        <td><%= pannel.advisement %> units</td>
+                    <% else %>
+                        <td>n/a</td>
+                    <% end %>
+                    <% if pannel.acceptance %>
+                        <td><%= pannel.acceptance %></td>
+                    <% else %>
+                        <td>n/a</td>
+                    <% end %>
+                    <% if pannel.accepted %>
+                        <td><%= pannel.accepted %>%</td>
+                    <% else %>
+                        <td>n/a</td>
+                    <% end %>
+                </tr>
+            <% end %>
+        <% end %>
+        </table>
+    </article>
+    <button id="toggle" class="button">Detailed View</button>
+    <script>
+    $( "button" ).click(function() {
+        $( "article" ).toggle();
+    });
+    </script>
+
+
+    <h1>Add a New Pannel</h1>
+
+    <form class="create" action="<%= pannels_url %>" method="post">
+        <label>
+            <input type="text" name="pannel[PID]" placeholder="PID" value="<%= @pannel.PID %>">
+        </label>
+
+        <label>
+            <input type="text" name="pannel[SID]" placeholder="SID" value="<%= @pannel.SID %>">
+        </label>
+
+
+        <label>
+            <input type="date" style="color: rgba(30, 107, 0, 0.55);" name="pannel[date]" placeholder="Date" value="<%= @pannel.date %>">
+        </label>
+
+        <label>
+            <input type="text" name="pannel[reading]" placeholder="Reading" value="<%= @pannel.reading %>">
+        </label>
+
+        <label>
+            <input type="text" name="pannel[amount]" placeholder="Amount" value="<%= @pannel.amount %>">
+        </label>
+
+        <label>
+            <input type="text" name="pannel[advisement]" placeholder="Advicement" value="<%= @pannel.advisement %>">
+        </label>
+
+        <input class="button" type="submit" name="" value="Enter New Pannel">
+    </form>
+    <ul id="errors">
+        <% if flash.now[:errors] %>
+            <% flash.now[:errors].each do |error| %>
+                <li><%= error.upcase %></li>
+            <% end %>
+        <% end %>
+    </ul>
+<div>
